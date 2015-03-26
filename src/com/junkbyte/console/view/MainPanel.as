@@ -804,7 +804,8 @@ package com.junkbyte.console.view
 				str += " <a href=\"event:copy\">Sv</a>";
 				str += " <a href=\"event:priority\">P"+_priority+"</a>";
 				str += doActive(" <a href=\"event:pause\">P</a>", console.paused);
-				str += " <a href=\"event:clear\">C</a> <a href=\"event:close\">X</a> <a href=\"event:hide\">›</a>";
+				str += " <a href=\"event:clear\">C</a> <a href=\"event:close\"> X </a>";
+                if(config.hideCommandsVisible) str += " <a href=\"event:hide\">›</a>";
 			}
 			str += " </b></menu></high></r>";
 			txtField.htmlText = str;

@@ -250,11 +250,11 @@ package com.junkbyte.console.view {
 		
 		public function set scalable(b:Boolean):void{
 			if(b && !scaler){
-				var size:uint = 8+(style.controlSize*0.5);
+				var size:uint = 5+style.menuFontSize;
 				scaler = new Sprite();
 				scaler.name = "scaler";
 				scaler.graphics.beginFill(0, 0);
-				scaler.graphics.drawRect(-size*1.5, -size*1.5, size*1.5, size*1.5);
+				scaler.graphics.drawRect(-size, -size, size, size);
 	            scaler.graphics.endFill();
 				scaler.graphics.beginFill(style.controlColor, style.backgroundAlpha);
 	            scaler.graphics.moveTo(0, 0);
@@ -264,7 +264,7 @@ package com.junkbyte.console.view {
 				scaler.buttonMode = true;
 				scaler.doubleClickEnabled = true;
 				scaler.addEventListener(MouseEvent.MOUSE_DOWN,onScalerMouseDown, false, 0, true);
-	            addChildAt(scaler, getChildIndex(bg)+1);
+	            addChild(scaler);
 			}else if(!b && scaler){
 				if(contains(scaler)){
 					removeChild(scaler);

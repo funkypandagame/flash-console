@@ -263,7 +263,12 @@ package com.junkbyte.console {
 		 * Ruler tool availability
 		 */
 		public var rulerToolEnabled:Boolean = true;
-		
+
+        /**
+         * Toggles the hide commands button in the top corner
+         */
+		public var hideCommandsVisible:Boolean = true;
+
 		/**
 		 * Determine if Console should hide mouse cursor when using Ruler tool.
 		 * <p>
