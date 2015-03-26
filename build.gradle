@@ -21,7 +21,7 @@ apply plugin: 'ideafx'
 apply plugin: 'maven'
 
 type = 'swc'
-version = '2.6-FP'
+version = '2.7-FP-1'
 playerVersion = '15.0'
 srcDirs	= ['src']
 

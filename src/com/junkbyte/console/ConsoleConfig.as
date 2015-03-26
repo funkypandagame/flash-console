@@ -306,6 +306,11 @@ package com.junkbyte.console
 		public var displayRollerEnabled:Boolean = true;
 
 		/**
+		 * Toggles the hide commands button in the top corner
+		 */
+		public var hideCommandsVisible:Boolean = true;
+
+		/**
 		 * Local shared object used for storing user data such as command line history
 		 * Set to null to disable storing to local shared object.
 		 */
