@@ -180,10 +180,11 @@ package com.junkbyte.console.view
 			//
 			if(fpsGroup != null){
 				if (_fpsPanel == null) {
-					_fpsPanel = new GraphingPanel(console, 80 ,40, GraphingPanel.FPS);
+					var fpsPanelWidth : Number = 80 + console.config.style.menuFontSize * 5;
+					_fpsPanel = new GraphingPanel(console, fpsPanelWidth ,40 + console.config.style.menuFontSize * 4, GraphingPanel.FPS);
 					_fpsPanel.name = GraphingPanel.FPS;
-					_fpsPanel.x = _mainPanel.x+_mainPanel.width-160;
-					_fpsPanel.y = _mainPanel.y+15;
+					_fpsPanel.x = _mainPanel.x+_mainPanel.width-fpsPanelWidth - console.config.style.menuFontSize * 2;
+					_fpsPanel.y = _mainPanel.y + console.config.style.menuFontSize * 2;
 					addPanel(_fpsPanel);
 					_mainPanel.updateMenu();
 				}
@@ -196,10 +197,11 @@ package com.junkbyte.console.view
 			//
 			if(memGroup != null){
 				if(_memPanel == null){
-					_memPanel = new GraphingPanel(console, 80 ,40, GraphingPanel.MEM);
+					var memPanelWidth : Number = 80 + console.config.style.menuFontSize * 5;
+					_memPanel = new GraphingPanel(console, memPanelWidth ,console.config.style.menuFontSize * 4, GraphingPanel.MEM);
 					_memPanel.name = GraphingPanel.MEM;
-					_memPanel.x = _mainPanel.x+_mainPanel.width-80;
-					_memPanel.y = _mainPanel.y+15;
+					_memPanel.x = _mainPanel.x + memPanelWidth * 2;
+					_memPanel.y = _mainPanel.y+ console.config.style.menuFontSize * 2;
 					addPanel(_memPanel);
 					_mainPanel.updateMenu();
 				}
@@ -300,19 +302,19 @@ package com.junkbyte.console.view
 		 * @private
 		 */
 		public function tooltip(str:String = null, panel:ConsolePanel = null):void{
-			if(str && !rulerActive){
+			if(str && !rulerActive && console.config.tooltipsVisible){
 				var split:Array = str.split("::");
 				str = split[0];
 				if(split.length > 1) str += "<br/><low>"+split[1]+"</low>";
 				console.addChild(_tooltipField);
 				_tooltipField.wordWrap = false;
 				_tooltipField.htmlText = "<tt>"+str+"</tt>";
-				if(_tooltipField.width>120){
-					_tooltipField.width = 120;
+				if(_tooltipField.width>150+console.config.style.menuFontSize*5){
+					_tooltipField.width = 150+console.config.style.menuFontSize*5;
 					_tooltipField.wordWrap = true;
 				}
 				_tooltipField.x = console.mouseX-(_tooltipField.width/2);
-				_tooltipField.y = console.mouseY+20;
+				_tooltipField.y = console.mouseY+10+console.config.style.menuFontSize;
 				if(panel){
 					var txtRect:Rectangle = _tooltipField.getBounds(console);
 					var panRect:Rectangle = new Rectangle(panel.x,panel.y,panel.width,panel.height);

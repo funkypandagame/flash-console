@@ -20,8 +20,9 @@ apply plugin: 'gradlefx'
 apply plugin: 'ideafx'
 apply plugin: 'maven'
 
+group = 'com.junkbyte'
 type = 'swc'
-version = '2.6-FP'
+version = '2.6-FP-1'
 playerVersion = '15.0'
 srcDirs	= ['src']
 

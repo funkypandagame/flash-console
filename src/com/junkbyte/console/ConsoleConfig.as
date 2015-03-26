@@ -270,6 +270,11 @@ package com.junkbyte.console {
 		public var hideCommandsVisible:Boolean = true;
 
 		/**
+		 * Toggles the hide commands button in the top corner
+		 */
+		public var tooltipsVisible:Boolean = true;
+
+		/**
 		 * Determine if Console should hide mouse cursor when using Ruler tool.
 		 * <p>
 		 * You may want to turn it off if your app/game don't use system mouse.
