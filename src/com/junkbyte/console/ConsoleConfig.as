@@ -264,6 +264,8 @@ package com.junkbyte.console {
 		 */
 		public var rulerToolEnabled:Boolean = true;
 
+        public var saveToClipboardButtonVisible : Boolean = true;
+
         /**
          * Toggles the hide commands button in the top corner
          */

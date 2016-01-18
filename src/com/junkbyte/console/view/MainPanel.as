@@ -99,8 +99,8 @@ package com.junkbyte.console.view
 		public function MainPanel(m:Console) {
 			super(m);
 			var fsize:int = style.menuFontSize;
-			//_viewingChannels = new Array();
-			//_ignoredChannels = new Array();
+			//_viewingChannels = [];
+			//_ignoredChannels = [];
 			
 			console.cl.addCLCmd("filter", setFilterText, "Filter console logs to matching string. When done, click on the * (global channel) at top.", true);
 			console.cl.addCLCmd("filterexp", setFilterRegExp, "Filter console logs to matching regular expression", true);
@@ -201,19 +201,19 @@ package com.junkbyte.console.view
 			if(console.so[CL_HISTORY] is Array){
 				_cmdsHistory = console.so[CL_HISTORY];
 			}else{
-				console.so[CL_HISTORY] = _cmdsHistory = new Array();
+				console.so[CL_HISTORY] = _cmdsHistory = [];
 			}
 			//
 			if(config.rememberFilterSettings && console.so[VIEWING_CH_HISTORY] is Array){
 				_viewingChannels = console.so[VIEWING_CH_HISTORY];
 			}else{
-				console.so[VIEWING_CH_HISTORY] = _viewingChannels = new Array();
+				console.so[VIEWING_CH_HISTORY] = _viewingChannels = [];
 			}
 			if(config.rememberFilterSettings && console.so[IGNORED_CH_HISTORY] is Array){
 				_ignoredChannels = console.so[IGNORED_CH_HISTORY];
 			}
 			if(_viewingChannels.length > 0 || _ignoredChannels == null){
-				console.so[IGNORED_CH_HISTORY] = _ignoredChannels = new Array();
+				console.so[IGNORED_CH_HISTORY] = _ignoredChannels = [];
 			}
 			if(config.rememberFilterSettings && console.so[PRIORITY_HISTORY] is uint)
 			{
@@ -390,7 +390,7 @@ package com.junkbyte.console.view
 				line = line.next;
 			}
 			_lockScrollUpdate = true;
-			_traceField.htmlText = "<logs>"+text+"</logs>";;
+			_traceField.htmlText = "<logs>"+text+"</logs>";
 			_lockScrollUpdate = false;
 			updateScroller();
 		}
@@ -471,7 +471,7 @@ package com.junkbyte.console.view
 		 * @private
 		 */
 		public function setViewingChannels(...channels:Array):void{
-			var a:Array = new Array();
+			var a:Array = [];
 			for each(var item:Object in channels) a.push(Console.MakeChannelName(item));
 			
 			if(_viewingChannels[0] == LogReferences.INSPECTING_CHANNEL && (!a || a[0] != _viewingChannels[0])){
@@ -503,7 +503,7 @@ package com.junkbyte.console.view
 		 * @private
 		 */
 		public function setIgnoredChannels(...channels:Array):void{
-			var a:Array = new Array();
+			var a:Array = [];
 			for each(var item:Object in channels) a.push(Console.MakeChannelName(item));
 			
 			if(_viewingChannels[0] == LogReferences.INSPECTING_CHANNEL){
@@ -789,10 +789,10 @@ package com.junkbyte.console.view
 				}
 				if(extra) str += "¦ ";
 				
-				str += doActive("<a href=\"event:fps\">F</a>", console.fpsMonitor>0);
+				//str += doActive("<a href=\"event:fps\">F</a>", console.fpsMonitor>0);
 				str += doActive(" <a href=\"event:mm\">M</a>", console.memoryMonitor>0);
 				
-				str += doActive(" <a href=\"event:command\">CL</a>", commandLine);
+				//str += doActive(" <a href=\"event:command\">CL</a>", commandLine);
 				
 				if(console.remoter.remoting != Remoting.RECIEVER){
 					if(config.displayRollerEnabled)
@@ -801,9 +801,8 @@ package com.junkbyte.console.view
 					str += doActive(" <a href=\"event:ruler\">RL</a>", console.panels.rulerActive);
 				}
 				str += " ¦</b>";
-				str += " <a href=\"event:copy\">Sv</a>";
+				if(config.saveToClipboardButtonVisible) str += " <a href=\"event:copy\">Sv</a>";
 				str += " <a href=\"event:priority\">P"+_priority+"</a>";
-				str += doActive(" <a href=\"event:pause\">P</a>", console.paused);
 				str += " <a href=\"event:clear\">C</a> <a href=\"event:close\"> X </a>";
                 if(config.hideCommandsVisible) str += " <a href=\"event:hide\">›</a>";
 			}
@@ -827,9 +826,9 @@ package com.junkbyte.console.view
 				str += "<a href=\"event:channel_"+channel+"\">["+channelTxt+"]</a> ";
 			}
 			if(limited){
-				str += "<ch><a href=\"event:channels\"><b>"+(channels.length>len?"...":"")+"</b>^^ </a></ch>";
+				str += "<ch><a href=\"event:channels\">"+(channels.length>len?"...":"")+"</a></ch>";
 			}
-			str += "</chs> ";
+			str += "</chs>";
 			return str;
 		}
 		private function doActive(str:String, b:Boolean):String{
@@ -1035,7 +1034,7 @@ package com.junkbyte.console.view
 		{
 			_cmdsInd = -1;
 			console.updateSO();
-			_cmdsHistory = new Array();
+			_cmdsHistory = [];
 		}
 		private function commandKeyDown(e:KeyboardEvent):void{
 			//e.stopPropagation();
@@ -1142,7 +1141,7 @@ package com.junkbyte.console.view
 						}
 					}
 				}
-				var strs:Array = new Array();
+				var strs:Array = [];
 				for each(var hint:Array in hints) strs.push("<p3>"+hint[0]+"</p3> <p0>"+(hint[1]?hint[1]:"")+"</p0>");
 				_hintField.htmlText = "<p>"+strs.reverse().join("\n")+"</p>";
 				_hintField.visible = true;

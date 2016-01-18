@@ -24,7 +24,9 @@
 */
 package com.junkbyte.console 
 {
-	import flash.utils.getTimer;
+import flash.events.MouseEvent;
+import flash.events.TouchEvent;
+import flash.utils.getTimer;
 	import flash.system.Capabilities;
 	import com.junkbyte.console.core.CommandLine;
 	import com.junkbyte.console.core.ConsoleTools;
@@ -58,7 +60,6 @@ package com.junkbyte.console
 		public static const VERSION:Number = 2.6;
 		public static const VERSION_STAGE:String = "";
 		public static const BUILD:int = 611;
-		public static const BUILD_DATE:String = "2012/02/22 00:11";
 		//
 		public static const LOG:uint = 1;
 		public static const INFO:uint = 3;
@@ -151,7 +152,13 @@ package com.junkbyte.console
 			stage.addEventListener(Event.MOUSE_LEAVE, onStageMouseLeave, false, 0, true);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, _kb.keyDownHandler, false, 0, true);
 			stage.addEventListener(KeyboardEvent.KEY_UP, _kb.keyUpHandler, false, 0, true);
+			addEventListener(MouseEvent.MOUSE_DOWN, stopPropagation);
+			addEventListener(TouchEvent.TOUCH_BEGIN, stopPropagation);
 		}
+        private static function stopPropagation(event:Event):void
+        {
+            event.stopPropagation();
+        }
 		private function stageRemovedHandle(e:Event=null):void{
 			_cl.base = null;
 			removeEventListener(Event.REMOVED_FROM_STAGE, stageRemovedHandle);
@@ -244,13 +251,13 @@ package com.junkbyte.console
 		/**
 		 * @copy com.junkbyte.console.Cc#setRollerCaptureKey()
 		 */
-		public function setRollerCaptureKey(char:String, shift:Boolean = false, ctrl:Boolean = false, alt:Boolean = false):void{
+		public function setRollerCaptureKey(character:String, shift:Boolean = false, ctrl:Boolean = false, alt:Boolean = false):void{
 			if(_rollerKey){
 				bindKey(_rollerKey, null);
 				_rollerKey = null;
 			}
-			if(char && char.length==1) {
-				_rollerKey = new KeyBind(char, shift, ctrl, alt);
+			if(character && character.length==1) {
+				_rollerKey = new KeyBind(character, shift, ctrl, alt);
 				bindKey(_rollerKey, onRollerCaptureKey);
 			}
 		}

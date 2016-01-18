@@ -181,7 +181,7 @@ package com.junkbyte.console {
 			_css.setStyle("low",{color:hesh(lowColor), fontFamily:menuFont, fontSize:menuFontSize-2, display:'inline'});
 			_css.setStyle("menu",{color:hesh(menuColor), display:'inline'});
 			_css.setStyle("menuHi",{color:hesh(menuHighlightColor), display:'inline'});
-			_css.setStyle("chs",{color:hesh(channelsColor), fontSize:menuFontSize, leading:'2', display:'inline'});
+			_css.setStyle("chs",{color:hesh(channelsColor), fontSize:0.4*(menuFontSize-10)+10, leading:'2', display:'inline'});
 			_css.setStyle("ch",{color:hesh(channelColor), display:'inline'});
 			_css.setStyle("tt",{color:hesh(menuColor),fontFamily:menuFont,fontSize:menuFontSize, textAlign:'center'});
 			_css.setStyle("r",{textAlign:'right', display:'inline'});
